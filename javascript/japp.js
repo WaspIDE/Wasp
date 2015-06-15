@@ -1,0 +1,1 @@
+var _0x3fde=["\x69\x6E\x69\x74","\x6D\x61\x74\x65\x72\x69\x61\x6C","\x72\x65\x61\x64\x79"];$(document)[_0x3fde[2]](function(){$[_0x3fde[1]][_0x3fde[0]]()});

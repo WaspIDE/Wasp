@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Wasp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="styles/elusive-icons/css/elusive-icons.min.css">
+    <link href="styles/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="libraries/dialog-polyfill-master/dialog-polyfill.css" />
+
+    <link href="libraries/bootstrap-material-design/dist/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
+    <link href="libraries/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
+    <link href="libraries/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
+    <link href="libraries/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
+
+    <link href="styles/main.css" rel="stylesheet">
+</head>
+
+<body id="pagewrapper">
+    <dialog id="save-popup">
+        <button id="closesavepopup1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">Save</h4>
+
+        <div class="form-group" style="padding-top: 15px;">
+    		<input class="form-control floating-label input-lg" id="saveinput" type="text" placeholder="Filename">
+		</div>
+
+		<div style="float: right;">
+			<button id="closesavepopup" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        	<button id="closesavepopup2" type="button" class="btn btn-primary">Save</button>
+		</div>
+    </dialog>
+
+    <dialog id="settings-popup" style="overflow: visible;">
+	    <button id="closesettingspopup1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 class="modal-title">Settings</h4>
+
+	    <form class="form-horizontal">
+	    	<fieldset>
+	    		<div class="form-group" style="padding-left: 15px; padding-top: 15px; font-size: 16px; margin: 0px;">
+	    			<div class="togglebutton">
+                    	<label id="readOnlyTxt">
+                    	    <input id="readOnlyInput" type="checkbox" checked="">
+                    	    Read Only
+                    	</label>
+                	</div>
+                    <div class="togglebutton">
+                        <label id="lintingTxt">
+                            <input id="lintingInput" type="checkbox" checked="">
+                            Disable Linting
+                        </label>
+                    </div>
+                    <div class="togglebutton">
+                        <label id="todoOptionTxt">
+                            <input id="todoOptionInput" type="checkbox" checked="">
+                            Disable Todo
+                        </label>
+                    </div>
+	    		</div>
+	    		<div class="form-group" style="padding-right: 75px; padding-left: 75px; padding-top: 7px;">
+	    			<input id="fontSizeInput" type="text" class="form-control floating-label" placeholder="Font Size" data-hint="Input must contain a number" onkeypress='validate(event)' >
+	    		</div>
+	    	</fieldset>
+	    </form>
+
+	    <div style="float: right;">
+			<button id="closesettingspopup" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        	<button id="closesettingspopup2" type="button" class="btn btn-primary">Save</button>
+		</div>
+    </dialog>
+
+     <dialog id="menu-popup" style="text-align: center;">
+        <button id="closemenupopup1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">Menu</h4>
+            
+        <div id="abtlist" style="width: 75%; padding-left: 25%">
+            <button id="aboutbtn" type="button" class="btn btn-default" style="width: 100%">About</button> 
+            <!-- <button id="contrbtn" type="button" class="btn btn-default" style="width: 100%">Suggestions</button> -->
+            <button id="changelogbtn" type="button" class="btn btn-default" style="width: 100%">Changelog</button>
+        </div>       
+
+        <div style="float: right;">
+            <button id="closemenupopup" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </dialog>
+
+    <dialog id="about-popup" style="text-align: center;">
+        <button id="closeaboutpopup1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">About</h4>
+
+        <div style="line-height: 6px; padding-bottom: 9px; padding-top: 9px;">
+            <p>Written by <a target="_blank" href="http://noahcorps.weebly.com/">Noah</a></p>
+            <p>Uses<a target="_blank" href="http://ace.c9.io/#nav=about"> Ace Editor</a> by C9</p>
+        </div>
+
+        <div style="line-height: 6px; color: rgba(0, 0, 0, 0.5)">
+            <p>Copyright © 2015</p>
+            <p>Version 0.1</p>
+        </div>
+
+        <div style="float: right;">
+            <button id="closeaboutpopup" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </dialog>
+
+    <!-- <dialog id="contribute-popup" style="overflow: vertical;">
+        <button id="closecontrpopup1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">Suggestions</h4>
+
+        <p>I am aware that there are many things that need to be fixed with Wasp. I would greatly appreciate it if you gave me feedback on what I should change.</p>
+        <p>Please visit the Minecraft Forum link <a>here</a></p>
+        <p>or fill out the form below</p>
+
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group" style="padding-right: 75px; padding-left: 15px; padding-top: 7px;">
+                    <textarea class="form-control floating-label" placeholder="Suggestions"></textarea>
+                </div>
+            </fieldset>
+        </form>
+
+        <div style="float: right;">
+            <button id="closecontrpopup" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button id="closecontrpopup2" type="button" class="btn btn-primary">Send</button>
+        </div>
+    </dialog> -->
+
+    <dialog id="changelog-popup">
+        <button id="closechlogpopup1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title">Changelog</h4>
+
+        <div id="changelogContent">
+            <h4><p class="versionNum">v0.1 </p> (June 15 2015)</h4> 
+            <ul>
+                <li class="changelogContent">The Wasp has hatched.</li>
+            </ul>
+        </div>
+
+        <div style="float: right;">
+            <button id="closechlogpopup" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </dialog>
+
+    <div class="navbar navbar-inverse" id="navbar">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="javascript:void(0)"><img src="images/favicon-w.png" alt="wasp" style="width: 30px; height: 30px"></img></a>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+        <ul class="nav navbar-nav">
+            <li id="savebtn"><a href="javascript:void(0)">Save</a></li>
+            <li id="settingsbtn"><a href="javascript:void(0)">Settings</a></li>
+            <li class="dropdown">
+                <a id="themeDropdownBtn" href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Theme <b class="caret"></b></a>
+                <ul id="dropdown-menu" class="dropdown-menu" style="overflow: scroll;">
+                	<li><a href="javascript:void(0)" id="themeitem1">Ambiance</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem2">Chaos</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem3">Chrome</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem4">Clouds</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem5">Clouds Midnight</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem6">Cobalt</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem7">Crimson</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem8">Dawn</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem9">Dreamweaver</a>
+                	<li><a href="javascript:void(0)" id="themeitem10">Eclipse</a></li></li>
+                	<li><a href="javascript:void(0)" id="themeitem11">Github</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem12">Idle Fingers</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem13">iPlastic</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem14">Katzenmilch</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem15">Kr Theme</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem16">Kurior</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem17">Merbivore</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem18">Merbivore Soft</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem19">Mono Industrial</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem20">Monokai</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem21">Pastel on Dark</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem22">Solarized Dark</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem23">Solarized Light</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem24">SQL Server</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem25">Terminal</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem26">Textmate</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem27">Tomorrow</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem28">Tomorrow Night</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem29">Tomorrow Night Blue</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem30">Tomorrow Night Bright</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem31">Tomorrow Night Eighties</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem32">Twilight</a></li>
+                	<li><a href="javascript:void(0)" id="themeitem33">Vibrant Ink</a></li>
+                   <!--  <li><a href="javascript:void(0)">Action</a></li>
+                    <li><a href="javascript:void(0)">Another action</a></li>
+                    <li><a href="javascript:void(0)">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Dropdown header</li>
+                    <li><a href="javascript:void(0)">Separated link</a></li>
+                    <li><a href="javascript:void(0)">One more separated link</a></li> -->
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void(0)" id="menubtn" style="height: 50px;"><i class="mdi-navigation-more-vert"></i></a></li>
+           <!--  <li class="dropdown">
+                <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)">Action</a></li>
+                    <li><a href="javascript:void(0)">Another action</a></li>
+                    <li><a href="javascript:void(0)">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="javascript:void(0)">Separated link</a></li>
+                </ul>
+            </li> -->
+        </ul>
+    </div>
+	</div>
+
+	<div id="editor">/*
+Made using Wasp by Noahz; the online IDE for ModPE
+*/
+
+function useItem(x, y, z, id, blockId, side, damage, blockDamage) {
+	//Called when the player taps a block
+}
+
+function modTick() {
+    //Called every Minecraft tick (there are 20 ticks a second)
+}</div>
+	<div id="consolearea" style="position: absolute; z-index: 2;  padding-left: 48px; background: #ebebeb;"> 
+		<ul id="consoletabs" class="nav nav-tabs" style="-webkit-box-shadow: 1px -3px 51px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px -3px 51px -9px rgba(0,0,0,0.75);
+    box-shadow: 1px -3px 51px -9px rgba(0,0,0,0.75);">
+            <li><a  id="tabConsole" class="" href="#consolecon" data-toggle="tab">Console</a></li>
+			<li  class="active"> <a id="tabError" href="#errors" data-toggle="tab">Errors <span class="badge" id="errorBadge">0</span></a></li>
+			<li><a id="tabTodo" href="#todo" data-toggle="tab">TODO</a></li>
+		</ul>
+        <div id="consoleContent" style="background: #fff; position: absolute; padding-left: 5px; padding-top: 3px; -webkit-box-shadow: 1px -3px 51px -9px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px -3px 51px -9px rgba(0,0,0,0.75);
+box-shadow: 1px -3px 51px -9px rgba(0,0,0,0.75); z-index: 3;" class="tab-content">
+            <div class="tab-pane fade" id="consolecon">
+                <p>Console</p>
+                <p>Currently Not Supported</p>
+                <input id="" type="text" class="form-control" placeholder="Currently Not Supported" data-hint="" style="padding-right: 15px;">
+            </div>
+            <div class="tab-pane fade active in" id="errors" style="overflow: auto; height: 100%;">
+                <!-- <p>Errors</p> -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Reason</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="errorTable">
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="todo" style="overflow: auto; height: 100%;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="todoTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+	</div>
+
+	<script src="libraries/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script src="libraries/ace-builds/src-noconflict/ext-language_tools.js"></script>
+	<script src="libraries/ace-builds/src-noconflict/ext-settings_menu.js"></script>
+	<script src="libraries/FileSaver/FileSaver.js" type="text/javascript" charset="utf-8"></script>
+	<script src="libraries/dialog-polyfill-master/dialog-polyfill.js" type="text/javascript" charset="utf-8"></script>
+	<script src="libraries/Blub.js" type="text/javascript" charset="utf-8"></script>
+	<script src="libraries/bootstrap-material-design/dist/jquery/dist/jquery.min.js"></script>
+    <script src="libraries/bootstrap-material-design/dist/bootstrap/js/bootstrap.min.js"></script>
+    <script src="libraries/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    <script src="libraries/bootstrap-material-design/dist/js/material.min.js"></script>
+
+    <script src="libraries/jshint/dist/jshint.js"></script>
+
+	<script src="javascript/app.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javascript/japp.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
